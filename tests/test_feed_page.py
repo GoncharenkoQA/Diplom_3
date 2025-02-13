@@ -2,9 +2,7 @@ from page_objects.feed_page import FeedPage
 from page_objects.main_page import MainPage
 from page_objects.order_history_page import OrderHistoryPage
 from page_objects.account_page import AccountPage
-from conftest import *
 import allure
-import time
 
 
 class TestFeedPage:
@@ -39,12 +37,10 @@ class TestFeedPage:
         main_page.click_on_button_constructor()
         main_page.click_on_button_login_in_main()
         main_page.drag_and_drop_ingredient_to_order()
-        time.sleep(5)
         main_page.click_on_button_make_order()
-        time.sleep(10)
+        feed_page.wait_for_loading_order_number()
         main_page.click_on_button_close_confirmation_modal()
         main_page.click_header_feed_button()
-        time.sleep(2)
         orders_count_2 = feed_page.get_quantity_of_orders()
         assert orders_count_1 < orders_count_2
 
@@ -57,12 +53,10 @@ class TestFeedPage:
         main_page.click_on_button_constructor()
         main_page.click_on_button_login_in_main()
         main_page.drag_and_drop_ingredient_to_order()
-        time.sleep(5)
         main_page.click_on_button_make_order()
-        time.sleep(10)
+        feed_page.wait_for_loading_order_number()
         main_page.click_on_button_close_confirmation_modal()
         main_page.click_header_feed_button()
-        time.sleep(2)
         orders_count_2 = feed_page.get_daily_quantity_of_orders()
         assert orders_count_1 < orders_count_2
 

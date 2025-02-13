@@ -67,7 +67,6 @@ def create_user_and_order_and_delete(create_new_user_and_delete):
     response_body = requests.post(Urls.order_create, data=payload, headers=headers)
 
     yield access_token, response_body
-    requests.delete(Urls.user_delete, headers={'Authorization': access_token})
 
 
 @pytest.fixture

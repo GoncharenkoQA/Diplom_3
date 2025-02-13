@@ -80,3 +80,7 @@ class MainPage(BasePage):
     def click_on_button_close_confirmation_modal(self):
         self.check_element_is_clickable(MainPageLocators.button_close_confirmation)
         self.click_on_element(MainPageLocators.button_close_confirmation)
+
+    @allure.step('Дождаться прогрузки номера заказа')
+    def wait_for_loading_order_number(self):
+        self.wait_for_element_to_change_text(MainPageLocators.number_of_order_in_modal_confirmation, '9999')

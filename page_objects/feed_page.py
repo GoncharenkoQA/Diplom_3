@@ -1,5 +1,6 @@
 from page_objects.base_page import BasePage
 from locators.feed_page_locators import FeedPageLocators
+from locators.main_page_locators import MainPageLocators
 import allure
 
 
@@ -15,6 +16,7 @@ class FeedPage(BasePage):
 
     @allure.step('Получить текст заголовка окна с деталями заказа')
     def get_text_on_title_of_modal_order(self):
+        self.wait_for_element_to_change_text(FeedPageLocators.title_of_modal_order, '9999')
         return self.get_text_on_element(FeedPageLocators.title_of_modal_order)
 
     @allure.step('Получить количество заказов за все время')
@@ -37,3 +39,7 @@ class FeedPage(BasePage):
     @allure.step('Получить номер последнего заказа в разделе "В работе"')
     def get_order_number_in_feed_progress_section(self):
         return self.get_text_on_element(FeedPageLocators.number_of_order_in_progress)
+
+    @allure.step('Дождаться прогрузки номера заказа')
+    def wait_for_loading_order_number(self):
+        self.wait_for_element_to_change_text(MainPageLocators.number_of_order_in_modal_confirmation, '9999')
